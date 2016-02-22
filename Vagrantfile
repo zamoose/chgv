@@ -52,7 +52,7 @@ domains_array = ['chgv.test', 'admin.chgv.test', 'xhprof.chgv.test', 'mail.chgv.
 # end
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-    config.vm.box = "centos/7"
+    config.vm.box = "bento/centos-6.7"
     config.vm.hostname = "chgv.test"
     config.vm.network "private_network", ip: "192.168.250.20"
     config.vm.network "forwarded_port", guest: 3306, host: 23306
@@ -68,22 +68,22 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         vb.name = vagrant_name
     end
 
-    config.vm.provider "hyperv" do |hv, override|
-        # Hyper-V compatible box
-        override.vm.box = "serveit/centos-7"
+    # config.vm.provider "hyperv" do |hv, override|
+    #     # Hyper-V compatible box
+    #     override.vm.box = "serveit/centos-7"
+    #
+    #     # The following configuration options are only available post 1.7.2
+    #     if vagrant_version >= "1.7.3"
+    #         hv.memory = 1024
+    #         hv.vmname = vagrant_name
+    #     end
+    # end
 
-        # The following configuration options are only available post 1.7.2
-        if vagrant_version >= "1.7.3"
-            hv.memory = 1024
-            hv.vmname = vagrant_name
-        end
-    end
-
-    config.vm.provider "parallels" do |vb, override|
-        override.vm.box = "parallels/centos-7.2"
-        vb.memory = 1024
-        vb.name = vagrant_name
-    end
+    # config.vm.provider "parallels" do |vb, override|
+    #     override.vm.box = "parallels/centos-7.2"
+    #     vb.memory = 1024
+    #     vb.name = vagrant_name
+    # end
 
     # config.vm.provider "vmware_fusion" do |vm, override|
     #     override.vm.box = "netsensia/ubuntu-trusty64"
@@ -97,7 +97,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     #     vm.vmx["displayname"] = vagrant_name
     # end
 
-    config.vm.synced_folder "./chgv_data", "/chgv_data", owner: "nginx", group: "nginx", create: "true"
+    config.vm.synced_folder "./chgv_data", "/chgv_data"#, owner: "nginx", group: "nginx", create: "true"
 
     config.vm.synced_folders.each do |id, options|
         # Make sure we use Samba for file mounts on Windows
@@ -128,7 +128,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     # Default/base provisioning
     config.vm.provision "shell" do |s|
-        s.path = "bin/hgv-init.sh"
+        s.path = "bin/init.sh"
         s.keep_color = true
     end
 

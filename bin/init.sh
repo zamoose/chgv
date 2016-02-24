@@ -27,7 +27,7 @@ echo
 echo "Checking/Installing Ansible."
 echo
 yum -y install epel-release
-yum -y install ansible
+yum -y install ansible --enablerepo epel-testing
 ansible_version=`rpm -qa 2>&1 | grep ansible | cut -f2 -d'-'`
 echo
 echo "Ansible installed ($ansible_version)"

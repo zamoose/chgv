@@ -1,0 +1,70 @@
+- name: Install necessary packages for proper system state
+  yum:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - python-pycurl
+    - gcc
+    - git
+    - curl
+    - wget
+    - vim
+    - unzip
+    - ack
+    - subversion
+    - autojump
+    - siege
+  tags: [ 'common' ]
+
+# - name: Get Composer
+#   get_url:
+#     url: https://getcomposer.org/composer.phar
+#     dest: /usr/local/bin/composer
+#     mode: 0755
+#     validate_certs: no
+#   tags: [ 'common' ]
+#
+# - name: Install PsySH
+#   get_url:
+#     url: http://psysh.org/psysh
+#     dest: /usr/local/bin/psysh
+#     mode: 0755
+#   tags: [ 'common' ]
+#
+# - name: Install Boris
+#   get_url:
+#     url: https://github.com/d11wtq/boris/releases/download/v1.0.8/boris.phar
+#     dest: /usr/local/bin/boris
+#     mode: 0755
+#     validate_certs: no
+#   tags: [ 'common' ]
+
+# - name: Set up host entries
+#   lineinfile: dest=/etc/hosts line="127.0.0.1 hhvm.hgv.test php.hgv.test cache.php.hgv.test cache.hhvm.hgv.test admin.hgv.test"
+
+# - name: Get PHPUnit
+#   get_url:
+#     url: https://phar.phpunit.de/phpunit.phar
+#     dest: /usr/local/bin/phpunit
+#     mode: 0755
+#     validate_certs: no
+#   tags: [ 'common' ]
+#
+# - name: Install CodeCeption test suite
+#   get_url:
+#     url: http://codeception.com/codecept.phar
+#     dest: /usr/local/bin/codecept
+#     mode: 0755
+#   tags: [ 'common' ]
+
+# - name: Create custom config directories
+#   file:
+#     path: "{{ item }}"
+#     state: directory
+#   with_items:
+#     - "{{ usr_config }}"
+#     - "{{ usr_config_sites }}"
+#     - "{{ usr_config_provision }}"
+
+# - include: swap.yml
+# - include: daemonize.yml

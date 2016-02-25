@@ -1,0 +1,9 @@
+---
+- name: Ensure Nginx repo is present and enabled
+  copy:
+    src: etc/yum.repos.d/nginx.repo
+    dest: /etc/yum.repos.d/nginx.repo
+    owner: root
+    group: root
+    mode: 0644
+  tags: [ 'nginx' ]

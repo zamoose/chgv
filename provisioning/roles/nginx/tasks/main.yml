@@ -7,3 +7,32 @@
     group: root
     mode: 0644
   tags: [ 'nginx' ]
+
+- name: Ensure Nginx is installed
+  yum:
+    name: nginx
+    state: installed
+  tags: [ 'nginx' ]
+
+- name: Template root Nginx config
+  template:
+    src: etc/nginx/nginx.conf
+    dest: /etc/nginx/nginx.conf
+  notify: restart nginx
+  tags: [ 'nginx' ]
+
+- name: Ensure Nginx is started
+  service:
+    name: nginx
+    enabled: yes
+    state: started
+  tags: [ 'nginx' ]
+
+- name: Set up PHP upstreams
+  copy:
+    src: etc/nginx/conf.d/upstream.conf
+    dest: /etc/nginx/conf.d/upstream.conf
+    owner: root
+    group: root
+    mode: 0644
+  tags: [ 'nginx' ]

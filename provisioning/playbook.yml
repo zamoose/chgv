@@ -1,10 +1,13 @@
 ---
 - hosts: all
   connection: local
-  sudo: yes
+  become: yes
+  become_user: root
 
   roles:
     - common
+    - remi
+    - php
     # - hhvm
     # - php-fpm
     # - memcached

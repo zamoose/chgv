@@ -1,0 +1,6 @@
+---
+- name: Install remi
+  yum:
+    name: http://rpms.remirepo.net/enterprise/remi-release-6.rpm
+    state: installed
+  tags: [ 'remi' ]

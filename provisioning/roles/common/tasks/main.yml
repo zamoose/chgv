@@ -3,6 +3,7 @@
     name: "{{ item }}"
     state: latest
   with_items:
+    - libselinux-python
     - python-pycurl
     - gcc
     - git
@@ -14,6 +15,11 @@
     - subversion
     - autojump
     - siege
+  tags: [ 'common' ]
+
+- name: Disable SELinux
+  selinux:
+    state: disabled
   tags: [ 'common' ]
 
 # - name: Get Composer

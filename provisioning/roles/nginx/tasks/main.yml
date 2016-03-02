@@ -29,10 +29,11 @@
   tags: [ 'nginx' ]
 
 - name: Set up PHP upstreams
-  copy:
+  template:
     src: etc/nginx/conf.d/upstream.conf
     dest: /etc/nginx/conf.d/upstream.conf
     owner: root
     group: root
     mode: 0644
+  notify: restart nginx
   tags: [ 'nginx' ]

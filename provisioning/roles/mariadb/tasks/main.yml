@@ -1,0 +1,32 @@
+---
+- name: Ensure upstream MariaDB repo is enabled
+  template:
+    src: etc/yum.repos.d/mariadb.repo
+    dest: /etc/yum.repos.d/mariadb.repo
+  tags: [ 'mariadb' ]
+
+- name: Install MariaDB packages
+  yum:
+    name: "{{ item }}"
+    enablerepo: mariadb
+    disablerepo: remi
+    state: installed
+  with_items:
+    - MariaDB-shared
+    - MariaDB-client
+    - MariaDB-server
+    - MySQL-python
+  tags: [ 'mariadb' ]
+
+- name: Make sure MariaDB is up and running
+  service:
+    name: mysql
+    enabled: yes
+    state: started
+  tags: [ 'mariadb' ]
+
+- name: Remove empty user
+  mysql_user:
+    name: ''
+    state: absent
+  tags: [ 'mariadb' ]

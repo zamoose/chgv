@@ -1,0 +1,30 @@
+---
+- name: Create install location for WP-CLI
+  file:
+    dest: /usr/share/wp-cli
+    mode: 0755
+    owner: root
+    group: root
+    state: directory
+  tags: [ 'wp-cli' ]
+
+- name: Install WP-CLI
+  command: curl https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -o /usr/share/wp-cli/wp
+  args:
+    creates: /usr/share/wp-cli/wp
+  tags: [ 'wp-cli' ]
+
+- name: Set execute bits on WP-CLI
+  file:
+    path: /usr/share/wp-cli/wp
+    owner: root
+    group: root
+    mode: 0755
+  tags: [ 'wp-cli' ]
+
+- name: Symlink WP-CLI
+  file:
+    dest: /usr/local/bin/wp
+    src: /usr/share/wp-cli/wp
+    state: link
+  tags: [ 'wp-cli' ]

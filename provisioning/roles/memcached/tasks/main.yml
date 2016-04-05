@@ -1,0 +1,15 @@
+---
+- name: Install relevant memcached packages
+  yum:
+    name: "{{ item }}"
+    state: installed
+  with_items:
+    - memcached
+  tags: [ 'memcached' ]
+
+- name: Make sure memcached is running
+  service:
+    name: memcached
+    state: started
+    enabled: yes
+  tags: [ 'memcached' ]

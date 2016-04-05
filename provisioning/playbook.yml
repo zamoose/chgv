@@ -9,13 +9,10 @@
     - nginx
     - remi
     - php
-    # - hhvm
-    # - php-fpm
-    # - memcached
-    # - percona
-    # - nginx
-    # - wp-cli
-    # - varnish
+    - mariadb
+    - memcached
+    - wp-cli
     # - admin
     # - xhprof
 
+# 

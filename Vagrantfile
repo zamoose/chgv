@@ -132,6 +132,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         s.keep_color = true
     end
 
+    config.vm.provision "ansible_local" do |ansible|
+        ansible.playbook = "provisioning/playbook.yml"
+    end
+
     # # Custom site provisioning
     # config.vm.provision "shell" do |s|
     #     s.path = "bin/custom-sites.sh"

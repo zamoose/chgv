@@ -1,11 +1,11 @@
 #!/bin/bash
 #
 # This script is invoked by the vagrant provisioner and runs inside the vagrant instance.
-# It provisions the initial environment, the runs the primary ansible playbook.
+# It provisions the initial environment, then runs the primary ansible playbook.
 #
 # This script can be run at command line:
 # $ vagrant ssh
-# $ sudo /bin/bash /vagrant/bin/hgv-init.sh
+# $ sudo /bin/bash /vagrant/bin/init.sh
 #
 echo "
 
@@ -41,11 +41,6 @@ if [[ -z $ANS_BIN ]]
     exit
 fi
 
-# echo
-# echo "Validating Ansible hostfile permissions."
-# echo
-# chmod 644 /vagrant/provisioning/hosts
-#
 # # More continuous scroll of the ansible standard output buffer
 export PYTHONUNBUFFERED=1
 export ANSIBLE_FORCE_COLOR=true
@@ -54,4 +49,4 @@ export ANSIBLE_FORCE_COLOR=true
 # if [ -e "/vagrant/hgv_data/config/provisioning/ansible.yml" ] ; then
 #     EXTRA="@/vagrant/hgv_data/config/provisioning/ansible.yml"
 # fi
-$ANS_BIN /vagrant/provisioning/playbook.yml -i'127.0.0.1,' --extra-vars="$EXTRA"
+#$ANS_BIN /vagrant/provisioning/playbook.yml -i'127.0.0.1,' --extra-vars="$EXTRA"

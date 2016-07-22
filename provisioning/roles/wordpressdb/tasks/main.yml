@@ -1,0 +1,20 @@
+---
+- name: Provision database for default sites
+  mysql_db:
+    name: "chgv_{{ item.site.slug }}"
+    state: present
+  with_items: '{{ wp }}'
+  tags: [ 'wordpressdb' ]
+
+- name: Create/grant permissions for database user for default sites
+  mysql_user:
+    name: "chgv_{{ item.0.site.slug }}_user"
+    priv: "chgv_{{ item.0.site.slug }}.*:ALL"
+    host: "{{ item.1 }}"
+    password: "wordpress"
+    state: present
+  with_nested:
+    - '{{ wp }}'
+    - [ "%", "localhost" ]
+  tags: [ 'wordpressdb' ]
+

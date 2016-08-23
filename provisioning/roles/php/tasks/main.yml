@@ -1,12 +1,12 @@
 ---
-- name: Install Base (5.6) PHP packages
+- name: Install SCL (5.6) PHP packages
   yum:
-    name: "{{ item }}"
+    name: "php56-{{ item }}"
     state: installed
-    enablerepo: remi-php56
+    enablerepo: remi
   with_items:
-    - php-common
     - php-fpm
+    - php-xml
     - php-xmlrpc
     - php-pecl-memcached
     - php-pecl-memcache
@@ -22,14 +22,14 @@
     - php-pecl-gearman
   tags: [ 'php' ]
 
-- name: Install SCL (7) PHP packages
+- name: Install base PHP (7.1) packages
   yum:
-    name: "php70-{{ item }}"
+    name: "{{ item }}"
     state: installed
-    enablerepo: remi
+    enablerepo: remi-php71
   with_items:
-    - php-common
     - php-fpm
+    - php-xml
     - php-xmlrpc
     - php-pecl-memcached
     - php-pecl-memcache
@@ -44,22 +44,22 @@
     - php-bcmath
   tags: [ 'php' ]
 
-- name: Configure PHP-FPM (5.6)
-  template:
-    src: etc/php-fpm.d/www.conf
-    dest: /etc/php-fpm.d/www.conf
-    owner: root
-    group: root
-    mode: 0644
-  notify: restart php-fpm
-  tags: [ 'php' ]
-
-- name: Configure PHP-FPM (7.0)
-  template:
-    src: etc/opt/remi/php70/php-fpm.d/www.conf
-    dest: /etc/opt/remi/php70/php-fpm.d/www.conf
-    owner: root
-    group: root
-    mode: 0644
-  notify: restart php70-php-fpm
-  tags: [ 'php' ]
+# - name: Configure PHP-FPM (5.6)
+#   template:
+#     src: etc/php-fpm.d/www.conf
+#     dest: /etc/php-fpm.d/www.conf
+#     owner: root
+#     group: root
+#     mode: 0644
+#   notify: restart php-fpm
+#   tags: [ 'php' ]
+#
+# - name: Configure PHP-FPM (7.0)
+#   template:
+#     src: etc/opt/remi/php70/php-fpm.d/www.conf
+#     dest: /etc/opt/remi/php70/php-fpm.d/www.conf
+#     owner: root
+#     group: root
+#     mode: 0644
+#   notify: restart php70-php-fpm
+#   tags: [ 'php' ]

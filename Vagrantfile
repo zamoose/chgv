@@ -52,8 +52,6 @@ domains_array = ['chgv.test', 'admin.chgv.test', 'xhprof.chgv.test', 'mail.chgv.
 # end
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-    #config.vm.box = "bento/centos-6.7"
-    #config.vm.box = "centos/7"
     config.vm.box = "geerlingguy/centos7"
     config.vm.hostname = "chgv.test"
     config.vm.network "private_network", ip: "192.168.250.20"

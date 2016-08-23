@@ -1,0 +1,22 @@
+---
+- name: Create doc roots
+  file:
+    path: "/var/www/html/{{ item.site.url }}/wordpress"
+    state: directory
+    owner: vagrant
+    group: vagrant
+    mode: 0771
+  with_items:
+    - "{{ wp }}"
+  tags: [ 'wordpress' ]
+
+- name: Download WordPress
+  command: /usr/local/bin/wp core download --path=/var/www/html/{{ item.site.url }}/wordpress
+  become: yes
+  become_user: vagrant
+  args:
+    creates: "/var/www/html/{{ item.site.url }}/wordpress/index.php"
+  with_items:
+    - "{{ wp }}"
+  tags: [ 'wordpress' ]
+

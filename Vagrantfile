@@ -97,7 +97,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     #     vm.vmx["displayname"] = vagrant_name
     # end
 
-    config.vm.synced_folder "./chgv_data", "/chgv_data", create: "true" #, owner: "nginx", group: "nginx", create: "true"
+    config.vm.synced_folder "./chgv_data", "/chgv_data", create: "true"
+    config.vm.synced_folder "./chgv_docroots", "/var/www/html", create: "true"
 
     config.vm.synced_folders.each do |id, options|
         # Make sure we use Samba for file mounts on Windows

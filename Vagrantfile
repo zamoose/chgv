@@ -14,7 +14,27 @@ vagrant_version = Vagrant::VERSION.sub(/^v/, '')
 
 require 'yaml'
 
-domains_array = ['chgv.test', 'admin.chgv.test', 'xhprof.chgv.test', 'mail.chgv.test']
+domains_array = ['chgv.test', 'admin.chgv.test', 'xhprof.chgv.test', 'mail.chgv.test', 'phpmyadmin.chgv.test']
+
+# Define the current host operating system to allow for
+# OS-specific functionality.
+module OS
+    def OS.windows?
+        (/cygwin|mswin|mingw|bccwin|wince|emx/ =~ RUBY_PLATFORM) != nil
+    end
+
+    def OS.mac?
+        (/darwin/ =~ RUBY_PLATFORM) != nil
+    end
+
+    def OS.unix?
+        !OS.windows?
+    end
+
+    def OS.linux?
+        OS.unix? and not OS.mac?
+    end
+end
 
 # def domains_from_yml(file)
 #     ret = []

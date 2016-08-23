@@ -6,13 +6,16 @@
 
   roles:
     - common
-    - nginx
     - remi
+    - admin
+    - nginx
     - php
     - mariadb
     - memcached
     - wp-cli
+    - wordpressdb
+    - wordpress
     # - admin
     # - xhprof
 
-# 
+#

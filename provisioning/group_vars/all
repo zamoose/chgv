@@ -1,3 +1,12 @@
 ---
 php56_port: 9000
 php70_port: 9001
+
+wp:
+- site:
+    name: CHGV default site
+    slug: chgv
+    url: chgv.test
+    db_name: chgv_wp_db
+    db_pass: wordpress
+    db_user: wordpress

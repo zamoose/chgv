@@ -7,7 +7,6 @@
   roles:
     - common
     - remi
-    - admin
     - nginx
     - php
     - mariadb

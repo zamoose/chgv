@@ -14,6 +14,14 @@
     state: installed
   tags: [ 'nginx' ]
 
+- name: Add Nginx user to Vagrant group
+  user:
+    name: nginx
+    group: vagrant
+    append: yes
+  tags: [ 'nginx' ]
+
+
 - name: Template root Nginx config
   template:
     src: etc/nginx/nginx.conf

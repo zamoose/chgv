@@ -1,0 +1,9 @@
+---
+- name: Install admin-related RPM packages
+  yum:
+    name: "{{ item }}"
+    state: installed
+    enablerepo: "remi,remi-test,remi-php56"
+  with_items:
+    - phpMyAdmin
+  tags: [ 'admin' ]

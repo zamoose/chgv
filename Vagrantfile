@@ -155,6 +155,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     config.vm.provision "ansible_local" do |ansible|
         ansible.playbook = "provisioning/playbook.yml"
+        ansible.config_file = "provisioning/ansible.cfg"
+        ansible.galaxy_roles_path = "provisioning/roles"
+        ansible.galaxy_role_file = "provisioning/requirements.yml"
     end
 
     # # Custom site provisioning
